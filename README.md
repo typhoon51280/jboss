@@ -2,9 +2,15 @@
 automated build for docker hub
 
 ## JBOSS EAP / WildFly
-based on `openjdk:8u151-jdk-alpine` image
 
-tags:
+tags (based on `openjdk:8u171-jdk-alpine3.8`):
+
+- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
+
+- [eap-7.2 (beta)](https://github.com/daggerok/jboss/blob/eap-7.2-beta/Dockerfile)
+- [wildfly-13.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-13.0.0.Final/Dockerfile)
+
+tags (based on `openjdk:8u151-jdk-alpine`):
 
 - [eap-7.1-full-ha](https://github.com/daggerok/jboss/blob/eap-7.1-full-ha/Dockerfile)
 - [eap-7.1-full](https://github.com/daggerok/jboss/blob/eap-7.1-full/Dockerfile)
@@ -26,8 +32,6 @@ tags:
 - [wildfly-8.1.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.1.0.Final/Dockerfile)
 - [wildfly-8.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.0.0.Final/Dockerfile)
 
-- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
-
 - [7.1.1.Final](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 
 **Exposed ports**:
@@ -42,7 +46,7 @@ tags:
 
 ```
 
-FROM daggerok/jboss:eap-7.1
+FROM daggerok/jboss:eap-7.2-beta
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
@@ -61,23 +65,23 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 ```
 
-#### multi-build deployment:
+#### multi-build deployment
 
 ```
 
-FROM daggerok/jboss:wildfly-12.0.0.Final
+FROM daggerok/jboss:wildfly-13.0.0.Final
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 ```
 
 ## JBOSS AS (OUTDATED / DEPRECATED / NOT RECOMMENDED FOR USE)
 
-tags:
+tags (based on `openjdk:8u151-jdk-alpine`):
 
 - [6.1.0.Final](https://github.com/daggerok/jboss/blob/6.1.0.Final/Dockerfile)
 - [5.1.0.GA](https://github.com/daggerok/jboss/blob/5.1.0.GA/Dockerfile)
 - [4.2.3.GA](https://github.com/daggerok/jboss/blob/4.2.3.GA/Dockerfile)
-- [4.2.3.GA-java1.5](https://github.com/daggerok/jboss/blob/4.2.3.GA-java1.5/Dockerfile) (based on `lwis/java5` image)
+- [4.2.3.GA-java1.5](https://github.com/daggerok/jboss/blob/4.2.3.GA-java1.5/Dockerfile) (based on `lwis/java5`)
 - [4.2.2.GA](https://github.com/daggerok/jboss/blob/4.2.2.GA/Dockerfile)
 
 **Exposed ports**:
@@ -113,7 +117,7 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
 
-#### multi-build deployment:
+#### multi-build deployment
 
 ```
 
