@@ -44,7 +44,7 @@ tags (based on `openjdk:8u151-jdk-alpine`):
 
 #### health-check
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:eap-7.2-beta
 HEALTHCHECK --timeout=2s --retries=22 \
@@ -56,7 +56,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 #### remote debug
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:eap-6.4
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
@@ -67,7 +67,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 #### multi-build deployment
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:wildfly-13.0.0.Final
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
@@ -96,7 +96,7 @@ tags (based on `openjdk:8u151-jdk-alpine`):
 
 #### health-check
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:5.1.0.Final
 HEALTHCHECK --timeout=2s --retries=22 \
@@ -108,7 +108,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
 
 #### remote debug
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:4.2.3.GA-java1.5
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
@@ -119,7 +119,7 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 #### multi-build deployment
 
-```
+```Dockerfile
 
 FROM daggerok/jboss:4.2.2.GA
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
